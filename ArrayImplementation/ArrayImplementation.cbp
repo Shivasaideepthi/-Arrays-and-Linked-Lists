@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+
+class SparseMatrix {
+private:
+    std::vector<std::vector<int>> compactMatrix;
+
+public:
+    void addElement(int row, int col, int value) {
+        if (value != 0) {
+            compactMatrix.push_back({row, col, value});
+        }
+    }
+
+    void display() {
+        std::cout << "Row Column Value\n";
+        for (const auto& element : compactMatrix) {
+            std::cout << element[0] << " " << element[1] << " " << element[2] << "\n";
+        }
+    }
+
+    // Method to accept input from the keyboard
+    void inputElements() {
+        std::cout << "Enter elements in 'row column value' format. Enter '-1 -1 -1' to end.\n";
+
+        while (true) {
+            int row, col, value;
+            std::cin >> row >> col >> value;
+
+            // Check for end condition
+            if (row == -1 && col == -1 && value == -1) {
+                break;
+            }
+
+            addElement(row, col, value);
+        }
+    }
+};
+
+int main() {
+    SparseMatrix matrix;
+
+    // Comment out the manual addElement calls to test keyboard input
+    // matrix.addElement(1, 2, 10);
+    // matrix.addElement(4, 5, 20);
+
+    // Now we will use inputElements method to accept input
+    matrix.inputElements();
+    matrix.display();
+
+    return 0;
+}
+
